@@ -1,0 +1,120 @@
+Algorithm
+Start.
+Input the number of courses n.
+Input the names of all courses.
+Create an adjacency list to represent the directed graph and initialize the in-degree of each course to zero.
+Input the number of links e.
+For each link:
+Input the source course and destination course.
+Check whether both courses exist.
+If valid, add the destination course to the source course's adjacency list.
+Increase the in-degree of the destination course by one.
+Display the adjacency list of all courses.
+Calculate and display the in-degree and out-degree of each course.
+Input the course name whose linked courses are to be displayed.
+Search for the selected course.
+If the course exists, display its directly linked courses; otherwise, display "Course not found!"
+Stop.
+
+Flowchart
+### Flowchart
+
+```text
+             +------------------+
+             |      START       |
+             +------------------+
+                      |
+                      v
+             +------------------+
+             | Input number of  |
+             | courses (n)       |
+             +------------------+
+                      |
+                      v
+             +------------------+
+             | Input course     |
+             | names            |
+             +------------------+
+                      |
+                      v
+             +------------------+
+             | Initialize       |
+             | adjacency list   |
+             | and in-degree    |
+             +------------------+
+                      |
+                      v
+             +------------------+
+             | Input number of  |
+             | links (e)        |
+             +------------------+
+                      |
+                      v
+             +------------------+
+             | Input source and |
+             | destination      |
+             +------------------+
+                      |
+                      v
+             +------------------+
+             | Are both course  |
+             | names valid?     |
+             +------------------+
+                 /         \
+              Yes           No
+               |             |
+               v             v
+      +----------------+  +----------------+
+      | Add edge to    |  | Display invalid|
+      | adjacency list |  | course name    |
+      | Update         |  +----------------+
+      | in-degree      |         |
+      +----------------+         |
+               |                 |
+               +--------+--------+
+                        |
+                        v
+             +------------------+
+             | Repeat for all   |
+             | prerequisite     |
+             | links            |
+             +------------------+
+                        |
+                        v
+             +------------------+
+             | Display          |
+             | adjacency list   |
+             +------------------+
+                        |
+                        v
+             +------------------+
+             | Display in-degree|
+             | and out-degree   |
+             +------------------+
+                        |
+                        v
+             +------------------+
+             | Input course to  |
+             | search           |
+             +------------------+
+                        |
+                        v
+             +------------------+
+             | Is course found? |
+             +------------------+
+                 /         \
+              Yes           No
+               |             |
+               v             v
+      +----------------+  +----------------+
+      | Display linked  |  | Display course |
+      | courses         |  | not found      |
+      +----------------+  +----------------+
+               |             |
+               +------+------+
+                      |
+                      v
+             +------------------+
+             |       STOP       |
+             +------------------+
+```
