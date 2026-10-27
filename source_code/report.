@@ -1,0 +1,326 @@
+# COURSE ADJACENCY LIST USING GRAPH IN C++
+
+## 1. ABSTRACT
+
+This project demonstrates the implementation of a graph using an adjacency list in C++. Each course is represented as a vertex, and the connection between two courses is represented as a directed edge. The program accepts course names and their links, displays the adjacency list, and allows the user to search for a course to display its directly linked courses. This project helps in understanding graph representation and its applications in course dependency management.
+
+## 2. INTRODUCTION
+
+A graph is a non-linear data structure consisting of vertices and edges. It is used to represent relationships between different objects. In this project, courses are represented as vertices, and their connections are represented as directed edges. An adjacency list is used to store these connections efficiently. The program is developed using C++ and uses vectors and strings to manage course information.
+
+## 3. PROBLEM STATEMENT
+
+To develop a C++ program that represents courses and their connections using a graph adjacency list, displays all course connections, and finds the directly linked courses of a selected course.
+
+## 4. OBJECTIVES
+
+1. To understand graph representation using an adjacency list.
+2. To store course names and their connections.
+3. To display the adjacency list of all courses.
+4. To search for a selected course.
+5. To display directly linked courses.
+6. To handle invalid course names.
+
+## 5. SOFTWARE REQUIREMENTS
+
+* Programming Language: C++
+* Software: Code::Blocks or Dev-C++
+* Operating System: Windows
+* Libraries: iostream, vector, string
+
+## 6. DATA STRUCTURES USED
+
+**1. Vector:** Used to store course names and graph connections dynamically.
+
+**2. Adjacency List:** Used to represent the connections between courses.
+
+**3. String:** Used to store course names and user input.
+
+**4. Integer:** Used to store course indices and the number of courses and links.
+
+## 7. ALGORITHM
+
+1. Start.
+2. Input the number of courses.
+3. Create a vector to store course names and an adjacency list to represent the graph.
+4. Enter the names of all courses.
+5. Input the number of prerequisite links.
+6. Enter the source and destination course names for each link.
+7. Find the indices of both courses.
+8. If both courses exist, add the destination course to the source course's adjacency list. Otherwise, display an invalid course name message.
+9. Display the adjacency list of all courses.
+10. Enter the course whose linked courses are to be displayed.
+11. Search for the selected course.
+12. If the course exists, display its directly linked courses.
+13. If no linked courses exist, display "None".
+14. If the course is not found, display "Course not found!".
+15. Stop.
+
+## 8. FLOWCHART
+
+```text
+             ┌─────────────┐
+             │    START    │
+             └──────┬──────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │ Input Number of        │
+        │ Courses (n)            │
+        └───────────┬───────────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │ Enter Course Names    │
+        │ Initialize Graph      │
+        └───────────┬───────────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │ Input Number of Links │
+        │ (e)                   │
+        └───────────┬───────────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │ Enter Source and      │
+        │ Destination Courses   │
+        └───────────┬───────────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │ Find Course Indices   │
+        └───────────┬───────────┘
+                    │
+                    ▼
+             ◇────────────◇
+            /  Both Courses \
+           /     Valid?      \
+           ◇──────┬─────┬────◇
+                  │YES  │NO
+                  ▼     ▼
+       ┌──────────────┐ ┌────────────────┐
+       │ Add Link to  │ │ Display Invalid│
+       │ Adjacency    │ │ Course Message │
+       │ List         │ └───────┬────────┘
+       └──────┬───────┘         │
+              └────────┬────────┘
+                       │
+                       ▼
+        ┌───────────────────────┐
+        │ Repeat for All Links  │
+        └───────────┬───────────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │ Display Adjacency List│
+        └───────────┬───────────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │ Enter Course to Search│
+        └───────────┬───────────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │ Search for the Course │
+        └───────────┬───────────┘
+                    │
+                    ▼
+             ◇────────────◇
+            / Course Found? \
+            ◇──────┬─────┬──◇
+                   │YES  │NO
+                   ▼     ▼
+        ┌────────────────┐ ┌────────────────┐
+        │ Display Linked │ │ Display Course │
+        │ Courses        │ │ Not Found      │
+        └───────┬────────┘ └───────┬────────┘
+                │                  │
+                └────────┬─────────┘
+                         │
+                         ▼
+                  ┌───────────┐
+                  │   STOP    │
+                  └───────────┘
+```
+
+## 9. SOURCE CODE
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int main()
+{
+    int n, e;
+
+    cout << "Enter number of courses: ";
+    cin >> n;
+
+    if (n <= 0)
+    {
+        cout << "Invalid number of courses!";
+        return 0;
+    }
+
+    vector<string> course(n);
+    vector<vector<int> > adj(n);
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Enter course name: ";
+        cin >> course[i];
+    }
+
+    cout << "Enter number of prerequisite links: ";
+    cin >> e;
+
+    if (e < 0)
+    {
+        cout << "Invalid number of links!";
+        return 0;
+    }
+
+    for (int i = 0; i < e; i++)
+    {
+        string from, to;
+        int u = -1, v = -1;
+
+        cout << "Enter course and linked course: ";
+        cin >> from >> to;
+
+        for (int j = 0; j < n; j++)
+        {
+            if (course[j] == from)
+                u = j;
+
+            if (course[j] == to)
+                v = j;
+        }
+
+        if (u != -1 && v != -1)
+            adj[u].push_back(v);
+        else
+            cout << "Invalid course name! Try again.\n";
+    }
+
+    cout << "\nCourse Adjacency List:\n";
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << course[i] << " -> ";
+
+        for (int j = 0; j < (int)adj[i].size(); j++)
+            cout << course[adj[i][j]] << " ";
+
+        cout << endl;
+    }
+
+    string selected;
+
+    cout << "\nEnter course to display linked courses: ";
+    cin >> selected;
+
+    int index = -1;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (course[i] == selected)
+        {
+            index = i;
+            break;
+        }
+    }
+
+    if (index != -1)
+    {
+        cout << "Directly linked courses of "
+             << selected << ": ";
+
+        if (adj[index].empty())
+            cout << "None";
+        else
+        {
+            for (int j = 0; j < (int)adj[index].size(); j++)
+                cout << course[adj[index][j]] << " ";
+        }
+
+        cout << endl;
+    }
+    else
+    {
+        cout << "Course not found!" << endl;
+    }
+
+    return 0;
+}
+```
+
+## 10. SAMPLE INPUT AND OUTPUT
+
+```text
+Enter number of courses: 4
+Enter course name: C
+Enter course name: Cpp
+Enter course name: Java
+Enter course name: Python
+
+Enter number of prerequisite links: 3
+
+Enter course and linked course: C Cpp
+Enter course and linked course: Cpp Java
+Enter course and linked course: Cpp Python
+
+Course Adjacency List:
+C -> Cpp
+Cpp -> Java Python
+Java ->
+Python ->
+
+Enter course to display linked courses: Cpp
+
+Directly linked courses of Cpp: Java Python
+```
+
+## 11. EXPLANATION OF OUTPUT
+
+The program accepts four courses: C, Cpp, Java, and Python. Three links are created: C to Cpp, Cpp to Java, and Cpp to Python. The adjacency list displays these connections. When the user selects Cpp, the program displays Java and Python because they are directly linked to Cpp.
+
+## 12. APPLICATIONS
+
+1. Representing course prerequisites in educational systems.
+2. Managing dependencies between subjects.
+3. Representing relationships between different objects.
+4. Learning graph data structures.
+5. Modeling directed networks.
+
+## 13. ADVANTAGES
+
+1. Simple and efficient graph representation.
+2. Dynamic storage of courses and connections.
+3. Easy searching of directly linked courses.
+4. Stores only the connections that exist.
+5. Helps understand graph concepts practically.
+
+## 14. LIMITATIONS
+
+1. Course names containing spaces are not supported.
+2. The program displays direct connections only.
+3. Course names are case-sensitive.
+4. Links are directed, so a connection from A to B does not automatically create a connection from B to A.
+
+## 15. CONCLUSION
+
+The project successfully demonstrates the implementation of a graph using an adjacency list in C++. It accepts course names and their connections, displays the complete adjacency list, and allows users to search for a course and view its directly linked courses. This project provides practical knowledge of graph representation, vectors, searching techniques, and dynamic data structures.
+
+## 16. REFERENCES
+
+1. C++ programming language documentation.
+2. Data Structures and Algorithms lecture notes.
+3. C++ Standard Library documentation for vectors and strings.
+
+
+
