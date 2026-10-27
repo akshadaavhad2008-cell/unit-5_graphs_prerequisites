@@ -1,0 +1,84 @@
+Algorithm
+Start.
+Read the number of courses n.
+Create a list to store course names and an adjacency list to represent the graph.
+Enter the names of all courses.
+Read the number of prerequisite links e.
+For each link:
+Enter the source course and linked course.
+Find their corresponding indices.
+If both courses exist, add the connection to the adjacency list.
+Otherwise, display an invalid course name message.
+Display the adjacency list of all courses.
+Enter the course name whose linked courses are to be displayed.
+Search for the selected course.
+If the course exists:
+Display its directly linked courses.
+If no linked courses exist, display None.
+Otherwise, display Course not found!
+Stop.
+
+Flowchart
+             ┌─────────────┐
+             │    START    │
+             └──────┬──────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │ Input number of       │
+        │ courses (n)           │
+        └───────────┬───────────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │ Enter course names    │
+        │ Initialize graph      │
+        └───────────┬───────────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │ Input number of links │
+        │ (e)                   │
+        └───────────┬───────────┘
+                    │
+                    ▼
+          ◇─────────────────◇
+         /  All links entered?\
+         ◇────────┬────────◇
+             NO   │   YES
+              │   │    │
+              ▼   │    ▼
+    ┌──────────────────┐  ┌───────────────────┐
+    │ Enter source and │  │ Display adjacency │
+    │ destination      │  │ list              │
+    └────────┬─────────┘  └─────────┬─────────┘
+             │                      │
+             ▼                      ▼
+    ┌──────────────────┐  ┌───────────────────┐
+    │ Find course      │  │ Enter course to   │
+    │ indices          │  │ search             │
+    └────────┬─────────┘  └─────────┬─────────┘
+             │                      │
+             ▼                      ▼
+       ◇─────────────◇    ┌───────────────────┐
+      / Courses valid? \  │ Search for course │
+      ◇──────┬──────◇    └─────────┬─────────┘
+        YES  │  NO                  │
+         │   │  │                   ▼
+         ▼   │  ▼             ◇─────────────◇
+    ┌───────────────┐        / Course found?  \
+    │ Add link to   │        ◇──────┬──────◇
+    │ adjacency list│          YES │ NO
+    └───────┬───────┘           │  │
+            │                   ▼  ▼
+            │          ┌──────────────┐
+            │          │ Display      │
+            │          │ linked       │
+            │          │ courses OR   │
+            │          │ error message│
+            │          └──────┬───────┘
+            │                 │
+            └─── Repeat       ▼
+                links    ┌───────────┐
+                         │   STOP    │
+                         └───────────┘
