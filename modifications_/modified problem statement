@@ -1,0 +1,3 @@
+### Problem Statement
+
+To develop a C++ program that represents courses and their prerequisite relationships using a directed graph and an adjacency list. The program displays the adjacency list, calculates the in-degree and out-degree of each course, and identifies the directly linked courses for a user-selected course.
